@@ -5,13 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.mock_shop.databinding.FragmentProductBinding
 import com.example.mock_shop.viewmodels.ProductViewModel
 
 class ProductFragment : Fragment() {
+
     private val args: ProductFragmentArgs by navArgs()
 
     private val productViewModel: ProductViewModel by lazy {
@@ -31,6 +34,13 @@ class ProductFragment : Fragment() {
         productViewModel.product.observe(viewLifecycleOwner, {
             it?.let {
                 binding.product = it
+                binding.addToCart.isEnabled = (it.quantity > 0)
+            }
+        })
+        productViewModel.response.observe(viewLifecycleOwner, {
+            it?.let {
+                Toast.makeText(requireContext(), "Added to Cart", Toast.LENGTH_LONG).show()
+                findNavController().popBackStack()
             }
         })
         return binding.root

@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.mock_shop.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        android:label="Spirit Storm Beauty"
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_productFragment"
             app:destination="@id/productFragment" />
@@ -17,8 +17,7 @@
     <fragment
         android:id="@+id/productFragment"
         android:name="com.example.mock_shop.ProductFragment"
-        android:label="fragment_product"
-        tools:layout="@layout/fragment_product" >
+        tools:layout="@layout/fragment_product">
         <argument
             android:name="id"
             app:argType="integer" />
@@ -26,11 +25,24 @@
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.mock_shop.CartFragment"
-        android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart" />
+        android:label="Shopping Cart"
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_cartFragment_to_checkoutFragment"
+            app:destination="@id/checkoutFragment" />
+    </fragment>
     <fragment
         android:id="@+id/checkoutFragment"
         android:name="com.example.mock_shop.CheckoutFragment"
-        android:label="fragment_checkout"
-        tools:layout="@layout/fragment_checkout" />
+        android:label="Checkout"
+        tools:layout="@layout/fragment_checkout" >
+        <argument
+            android:name="subtotal"
+            app:argType="float" />
+        <action
+            android:id="@+id/action_checkoutFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

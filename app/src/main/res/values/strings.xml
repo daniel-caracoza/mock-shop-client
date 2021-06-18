@@ -4,4 +4,16 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="shopping_cart">Cart</string>
     <string name="add_to_cart">Add to Cart</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="checkout">Checkout</string>
+    <string name="price">$%s</string>
+    <string name="delete">Delete</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email">Email</string>
+    <string name="address">Address</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="zip">Zip Code</string>
+    <string name="complete_checkout">Complete checkout</string>
 </resources>

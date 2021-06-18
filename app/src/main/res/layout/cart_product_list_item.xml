@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="clickListener"
+            type="com.example.mock_shop.ui.CartProductClickListener" />
+
+        <variable
+            name="product"
+            type="com.example.mock_shop.database.Product" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/product_img"
+                android:layout_width="125dp"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/app_name"
+                app:bindImage="@{product.img_url}"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/product_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    android:text="@{product.product_name}"/>
+
+                <TextView
+                    android:id="@+id/product_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    android:text="@{@string/price(product.price)}" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="8dp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:text="-"
+                        android:onClick="@{() -> clickListener.onDecrementQuantityClick(product)}"
+                        />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="@{String.valueOf(product.quantity)}"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="8dp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:onClick="@{() -> clickListener.onIncrementQuantityClick(product)}"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:text="+" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:onClick="@{() -> clickListener.onDeleteClick(product)}"
+                        android:text="@string/delete"/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

@@ -4,8 +4,11 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.example.mock_shop.database.Product
 import com.example.mock_shop.database.getDatabase
+import com.example.mock_shop.domain.Cart
 import com.example.mock_shop.repository.Repository
 import kotlinx.coroutines.launch
+import timber.log.Timber
+import java.io.IOException
 import java.lang.IllegalArgumentException
 
 class ProductViewModel(application: Application, id: Int): AndroidViewModel(application) {
@@ -13,23 +16,35 @@ class ProductViewModel(application: Application, id: Int): AndroidViewModel(appl
     private val repository = Repository(getDatabase(application))
 
     private val _product = MutableLiveData<Product>()
-
     val product: LiveData<Product>
     get() = _product
 
+    private val _response = MutableLiveData<Cart?>()
+    val response: LiveData<Cart?>
+    get() = _response
+
     init {
         getProductFromRepository(id)
+        _response.value = null
     }
 
     private fun getProductFromRepository(id: Int) {
         viewModelScope.launch {
-           _product.value =  repository.getProductById(id)
+           try {
+               _product.value =  repository.getProductById(id)
+           } catch (e: IOException) {
+               Timber.e(e)
+           }
         }
     }
 
     fun addToCart(){
         viewModelScope.launch {
-            repository.addToCart(_product.value!!.id)
+            try {
+                _response.value = repository.addToCart(_product.value!!.id)
+            } catch (e: IOException) {
+                Timber.e(e)
+            }
         }
     }
 

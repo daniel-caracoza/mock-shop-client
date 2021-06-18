@@ -49,7 +49,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:text="@{String.valueOf(product.price)}" />
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    android:text="@{@string/price(product.price)}" />
 
 
             </LinearLayout>
